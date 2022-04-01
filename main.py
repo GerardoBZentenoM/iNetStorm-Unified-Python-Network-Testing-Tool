@@ -4,6 +4,7 @@
 **    Proyect        : DoS-BruteForce-FakeData-Attack
 **    IDE            : Visual Studio Code
 **    Language       : Python 3.9.7
+**    OS             : Ubuntu 21.10
 **    Date/Hour      : 03/31/2022
 **    Description    :
 **         A Python tool to perform DoS, brute force and fake data fill attacks
@@ -23,6 +24,13 @@
    ###########################################################################*/
 """
 
+import os
+from art import welcome
 
-def test():
-    print("Hi")
+
+print(welcome)
+
+if 'SUDO_UID' not in os.environ.keys():
+    print("Try running this program with sudo.")
+    print("Try with: 'sudo python3 main.py'")
+    exit()
