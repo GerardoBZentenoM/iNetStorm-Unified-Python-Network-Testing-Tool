@@ -14,7 +14,7 @@
 **
 **   Versión        : Beta
 **   Revisión       : A
-**   Release        : 0.0.1
+**   Release        : 0.0.2
 **   Bugs & Fixes   :
 **
 **   Date           :
@@ -26,9 +26,10 @@
 
 import os
 import socket
-from art import welcome
 from ipaddress import IPv4Network
 
+from art import welcome
+from domain_blacklist import domain_blacklist
 
 print(welcome)
 
@@ -41,6 +42,11 @@ if 'SUDO_UID' not in os.environ.keys():
 target = input("Enter the IP address to test ej. 192.168.100.80 or test.com \n")
 # target = "192.168.100.15"
 # target = "google.com"
+
+for domain in domain_blacklist:
+    if domain in target:
+        print("Please don't use this tool in this website.")
+        exit()
 
 try:
     host = target.replace(
