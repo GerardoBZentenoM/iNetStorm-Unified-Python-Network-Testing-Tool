@@ -25,7 +25,9 @@
 """
 
 import os
+import socket
 from art import welcome
+from ipaddress import IPv4Network
 
 
 print(welcome)
@@ -34,3 +36,19 @@ if 'SUDO_UID' not in os.environ.keys():
     print("Try running this program with sudo.")
     print("Try with: 'sudo python3 main.py'")
     exit()
+
+
+target = input("Enter the IP address to test ej. 192.168.100.80 or test.com \n")
+# target = "192.168.100.15"
+# target = "google.com"
+
+try:
+    host = target.replace(
+        "https://", "").replace("http://", "").replace("www.", "")
+    ip_target = socket.gethostbyname(host)
+    print(f"ip_target: {ip_target}")
+except Exception as e:
+    print(e)
+
+net = IPv4Network(ip_target)
+print(f"net: {net}")
