@@ -33,7 +33,7 @@ from domain_blacklist import domain_blacklist
 
 print(welcome)
 
-if 'SUDO_UID' not in os.environ.keys():
+if "SUDO_UID" not in os.environ.keys():
     print("Try running this program with sudo.")
     print("Try with: 'sudo python3 main.py'")
     exit()
@@ -49,8 +49,7 @@ for domain in domain_blacklist:
         exit()
 
 try:
-    host = target.replace(
-        "https://", "").replace("http://", "").replace("www.", "")
+    host = target.replace("https://", "").replace("http://", "").replace("www.", "")
     ip_target = socket.gethostbyname(host)
     print(f"ip_target: {ip_target}")
 except Exception as e:
