@@ -25,13 +25,23 @@
 """
 
 import os
+import random
 import socket
 from ipaddress import IPv4Network
 
-from art import welcome
-from domain_blacklist import domain_blacklist
+from sources.art import welcome
+from sources.domain_blacklist import domain_blacklist
+
+# name lists obtain by: https://github.com/terryweiss/ink-collector.git
+from sources.first_names import first_names
+from sources.last_names import last_names
 
 print(welcome)
+print(
+    "Description: A Python tool to perform DoS, brute force and fake data fill attacks."
+)
+print("Please, only use this to educational propose.")
+print("DON'T ATTACK LEGITIM WEBSITES. \n")
 
 if "SUDO_UID" not in os.environ.keys():
     print("Try running this program with sudo.")
@@ -57,3 +67,74 @@ except Exception as e:
 
 net = IPv4Network(ip_target)
 print(f"net: {net}")
+
+
+def random_name():
+    try:
+        random_name = random.choice(first_names) + " " + random.choice(last_names)
+        return random_name
+    except Exception as e:
+        print(e)
+
+
+# ********************************************************
+# In progres
+# TODO: Make this function
+def random_phone_number():
+    # TODO: Make this function
+    """This function returns a phone number"""
+    # if start == 0:
+    #     string = ''
+    #     for i in range(n):
+    #         string += str(random.randint(0, 9))
+    #     return string
+    # else:
+    #     string = str(start)
+    #     for i in range(n):
+    #         string += str(random.randint(0, 9))
+    #     return string
+    return "1122334455"
+
+
+def random_email():
+    """Return a random fake armed email (I guess)"""
+    # TODO: Make this function
+    email = "test@test.com"
+    return email
+
+
+def random_password():
+    """This function returns password"""
+    # string = ''
+    # arr = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#*'
+    # for _ in range(n):
+    #     string += arr[random.randint(0, 55)]
+    # return string
+    # pass
+    return "supersecurepassword"
+
+
+# ********************************************************
+
+
+def post_fake_data(ip_target, username=False, password=False, phone=False, email=False):
+    """Attack to post fake data to the target"""
+    credentials = {}
+    credentials.update({"ip_target": ip_target})
+    if username:
+        username = random_name()
+        credentials.update({"username": username})
+    if password:
+        password = random_password()
+        credentials.update({"password": password})
+    if phone:
+        phone = random_phone_number()
+        credentials.update({"phone": phone})
+    if email:
+        email = random_email()
+        credentials.update({"email": email})
+    return credentials
+
+
+credentials = post_fake_data(net, username=True, password=True, phone=False, email=True)
+print(credentials)
