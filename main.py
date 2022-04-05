@@ -1,3 +1,4 @@
+# ! /usr/bin/python
 """
 /* #############################################################################
 **    File           : main.py
@@ -27,6 +28,8 @@
 import os
 import random
 import socket
+
+from phone_gen import PhoneNumber  # From: https://github.com/tolstislon/phone-gen
 from ipaddress import IPv4Network
 
 from sources.art import welcome
@@ -45,7 +48,7 @@ print("DON'T ATTACK LEGITIM WEBSITES. \n")
 
 if "SUDO_UID" not in os.environ.keys():
     print("Try running this program with sudo.")
-    print("Try with: 'sudo python3 main.py'")
+    print("Try with: 'sudo ./.venv/lib/python3.9/site-packages main.py'")
     exit()
 
 
@@ -77,23 +80,16 @@ def random_name():
         print(e)
 
 
+def random_phone_number(country="USA"):
+    """This function returns a phone number"""
+    phone_number = PhoneNumber(country)
+    phone_number = phone_number.get_number()
+    phone_number = phone_number[1:]
+    return phone_number
+
+
 # ********************************************************
 # In progres
-# TODO: Make this function
-def random_phone_number():
-    # TODO: Make this function
-    """This function returns a phone number"""
-    # if start == 0:
-    #     string = ''
-    #     for i in range(n):
-    #         string += str(random.randint(0, 9))
-    #     return string
-    # else:
-    #     string = str(start)
-    #     for i in range(n):
-    #         string += str(random.randint(0, 9))
-    #     return string
-    return "1122334455"
 
 
 def random_email():
@@ -136,5 +132,5 @@ def post_fake_data(ip_target, username=False, password=False, phone=False, email
     return credentials
 
 
-credentials = post_fake_data(net, username=True, password=True, phone=False, email=True)
+credentials = post_fake_data(net, username=True, password=True, phone=True, email=True)
 print(credentials)
