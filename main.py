@@ -33,7 +33,7 @@ from phone_gen import PhoneNumber  # From: https://github.com/tolstislon/phone-g
 from ipaddress import IPv4Network
 
 from sources.art import welcome
-from sources.domain_blacklist import domain_blacklist
+from sources.domain_blacklist import domain_blacklist, email_extention, email_domain
 
 # name lists obtain by: https://github.com/terryweiss/ink-collector.git
 from sources.first_names import first_names
@@ -46,10 +46,10 @@ print(
 print("Please, only use this to educational propose.")
 print("DON'T ATTACK LEGITIM WEBSITES. \n")
 
-if "SUDO_UID" not in os.environ.keys():
-    print("Try running this program with sudo.")
-    print("Try with: 'sudo ./.venv/lib/python3.9/site-packages main.py'")
-    exit()
+# if "SUDO_UID" not in os.environ.keys():
+#     print("Try running this program with sudo.")
+#     print("Try with: 'sudo ./.venv/lib/python3.9/site-packages main.py'")
+#     exit()
 
 
 target = input("Enter the IP address to test ej. 192.168.100.80 or test.com \n")
@@ -92,11 +92,12 @@ def random_phone_number(country="USA"):
 # In progres
 
 
-def random_email():
+def random_email(username):
     """Return a random fake armed email (I guess)"""
     # TODO: Make this function
-    email = "test@test.com"
-    return email
+    first_name, last_name = username.split(" ", 1)
+    email = f"{first_name}.{last_name}@{random.choice(email_domain)}.{random.choice(email_extention)}"
+    return email.lower()
 
 
 def random_password():
@@ -127,7 +128,7 @@ def post_fake_data(ip_target, username=False, password=False, phone=False, email
         phone = random_phone_number()
         credentials.update({"phone": phone})
     if email:
-        email = random_email()
+        email = random_email(username)
         credentials.update({"email": email})
     return credentials
 
