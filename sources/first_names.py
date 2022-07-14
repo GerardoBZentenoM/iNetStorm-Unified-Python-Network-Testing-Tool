@@ -1,3 +1,4 @@
+# name lists obtain by: https://github.com/terryweiss/ink-collector.git
 first_names = [
     "Kristina",
     "Paige",

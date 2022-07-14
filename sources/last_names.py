@@ -1,3 +1,5 @@
+# name lists obtain by: https://github.com/terryweiss/ink-collector.git
+
 last_names = [
     "Chung",
     "Chen",
