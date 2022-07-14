@@ -14,7 +14,7 @@ def target_validation(target):
         print(f"ip_target: {ip_target}")
         target_ip = IPv4Network(ip_target)
         print(f"net: {target_ip}")
-        return target_ip
+        return ip_target, target_ip
     except Exception as e:
         print(e)
         print(
