@@ -5,7 +5,7 @@
 # **    Proyect        : DoS-BruteForce-FakeData-Attack
 # **    IDE            : Visual Studio Code
 # **    Language       : Python 3.9.7
-# **    OS             : Ubuntu 21.10
+# **    OS             :
 # **    Date/Hour      : 03/31/2022
 # **    Description    :
 # **         A Python tool to perform DoS, brute force and fake data fill attacks
@@ -21,19 +21,19 @@
 # **   Date           :
 # **
 # **
-# **   Usage          : sudo python3 main.py
+# **   Usage          : sudo ./.venv/bin/python3.9 main.py main.py
 #    ###########################################################################*/
 # """
 import os
-from attacks import fake_data, ping_of_death
 
+from attacks import attack_flood_udp, fake_data, ping_of_death
 from sources.art import welcome
 from validations import target_validation
 
 
 print(welcome)
 print(
-    "Description: A Python tool to perform DoS, brute force and fake data fill attacks."
+    "Description: A Python tool to perform UDP Flood, brute force and fake data fill attacks."
 )
 print("Please, only use this to educational propose.")
 print("DON'T USE IN LEGITIM WEBSITES.\n")
@@ -53,28 +53,31 @@ attack = input(
     """
 Select some of the folowing tests:
 1) Post random and fake data
-2) DoS Attack
+2) UDP Flood
 3) Ping of the death test
 
 : """
 )
 
 if attack == "1":
-    print("Post in the target the following data: ")
     number_of_requests = int(
         input("Select the number of requests do you want, ej. 10: ")
     )
-
     for _ in range(number_of_requests):
         credentials = fake_data(
             target, username=True, password=True, phone=True, email=True
         )
+        print("Post in the target the following data: ")
         print(credentials)
+
 elif attack == "2":
-    print("DoS Attack")
-    number_of_requests = int(
-        input("Select the number of requests do you want, ej. 10: ")
+    test_duration = int(
+        input("Select the duration of the test (in seconds) ej, 10\n:  ")
     )
+    attack_flood_udp(test_duration, target_ip)
+
 else:
-    print("Another attack")
-    ping_of_death(10, target_ip)
+    test_duration = int(
+        input("Select the duration of the test (in seconds) ej, 10\n:  ")
+    )
+    ping_of_death(test_duration, target_ip)
