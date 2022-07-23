@@ -33,17 +33,17 @@ git clone https://github.com/GerardoBZentenoM/DoS-BruteForce-FakeData.git
 cd DoS-BruteForce-FakeData
 ```
 
-Download a Virtual Env.
+Download a Virtual Env. (in Ubuntu 20)
 
 ```
 sudo apt install python3-venv
 ```
-Create a virtual env
+Create a virtual env (in Ubuntu 20)
 
 ```
 python3 -m venv .venv
 ```
-Activate the venv
+Activate the venv (in Ubuntu 20)
 
 ```
 source .venv/bin/activate
@@ -66,11 +66,15 @@ Download the requeriments
 ```
 pip install -r requeriments.txt
 ```
-_Run:_
+_Run:_ (in Ubuntu 20)
 
 ```
-sudo ./.venv/bin/python3.9 main.py main.py
+sudo ./.venv/bin/python3 main.py
 ```
+
+Example:
+
+![alt text](/sources/pythonetwork-test.png)
 
 
 ## Made with 🛠️

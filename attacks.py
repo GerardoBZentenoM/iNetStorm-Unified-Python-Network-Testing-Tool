@@ -15,7 +15,7 @@ from random_data import (
 
 
 def fake_data(ip_target, username=False, password=False, phone=False, email=False):
-    """Make a request POST with random info selected
+    """Make a POST request with random info selected
 
     Args:
         ip_target (str): IP direction of the target
