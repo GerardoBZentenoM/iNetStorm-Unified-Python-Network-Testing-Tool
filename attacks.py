@@ -75,3 +75,21 @@ def attack_flood_udp(time_selected, ip_target):
     except:
         print("Can't perform the atack, passing")
         pass
+
+
+def port_scan(ip_target, ports=500):
+    """A simple port scanner, idea from Complete Ethical Hacking Bootcamp 2023: Zero to Mastery Course in Udemy
+
+    Args:
+        ip_target (str): IP direction of the target
+        ports (int, optional): Number of ports to check up to 1 to "ports". Defaults to 500.
+    """
+    print('\n' + ' Starting Scan For ' + str(ip_target))
+    for port in range(1, ports):
+        try:
+            sock = socket.socket()
+            sock.connect((ip_target, port))
+            print("[+] Port Opened " + str(port))
+            sock.close()
+        except:
+            pass

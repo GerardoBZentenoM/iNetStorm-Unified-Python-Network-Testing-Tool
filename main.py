@@ -15,18 +15,18 @@
 # **
 # **   Versión        : Beta
 # **   Revisión       : A
-# **   Release        : 0.0.2
+# **   Release        : 0.0.3
 # **   Bugs & Fixes   :
 # **
 # **   Date           :
 # **
 # **
-# **   Usage          : sudo ./.venv/bin/python3.9 main.py main.py
+# **   Usage          : sudo .venv/bin/python3 main.py
 #    ###########################################################################*/
 # """
 import os
 
-from attacks import attack_flood_udp, fake_data, ping_of_death
+from attacks import attack_flood_udp, fake_data, ping_of_death, port_scan
 from sources.art import welcome
 from validations import target_validation
 
@@ -40,7 +40,7 @@ print("DON'T USE IN LEGITIM WEBSITES.\n")
 
 if "SUDO_UID" not in os.environ.keys():
     print("Try running this program with sudo.")
-    print("Try with: 'sudo ./.venv/bin/python3.9 main.py main.py'")
+    print("Try with: 'sudo .venv/bin/python3 main.py'")
     exit()
 
 
@@ -52,6 +52,7 @@ print(f"The direcction of the target is: {target_ip} net: {target_net}")
 attack = input(
     """
 Select some of the folowing tests:
+0) Portscanner
 1) Post random and fake data
 2) UDP Flood
 3) Ping of the death test
@@ -75,6 +76,12 @@ elif attack == "2":
         input("Select the duration of the test (in seconds) ej, 10\n:  ")
     )
     attack_flood_udp(test_duration, target_ip)
+
+elif attack == "0":
+    ports = int(
+        input("Select how many ports do you want to scan ej, 500\n:  ")
+    )
+    port_scan(target_ip, ports)
 
 else:
     test_duration = int(
